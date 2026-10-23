@@ -1,0 +1,23 @@
+# Car Video (cá nhân)
+
+App Android phát **YouTube** và **TV (IPTV/M3U/HLS)** lên màn hình xe qua Android Auto.
+Chỉ dùng cá nhân, không phát hành lên Play Store. **Chỉ xem khi xe đã đỗ.**
+
+## Cách hoạt động
+- Khai báo là app *navigation* của Car App Library để Android Auto cấp một `Surface` toàn màn hình.
+- ExoPlayer (Media3) vẽ video lên Surface đó; điều khiển ⏮ ⏯ ⏭ nằm ở action strip.
+- Trên điện thoại: dán link YouTube (giải mã bằng NewPipeExtractor) hoặc URL danh sách M3U rồi chọn kênh.
+
+## Cài đặt
+1. Mở thư mục này bằng Android Studio, để nó sync Gradle (tự tạo wrapper), rồi Run để cài lên điện thoại.
+2. Trên điện thoại: Cài đặt > Android Auto > bấm nhiều lần vào "Phiên bản" để bật **Developer settings**,
+   rồi bật **Unknown sources**.
+3. Kết nối xe, mở app "Car Video" trong danh sách ứng dụng của Android Auto.
+   (Có thể cần bật "Application mode: Developer" nếu app không hiện.)
+4. Mở app trên điện thoại, chọn nguồn phát.
+
+## Lưu ý
+- Chưa được build/test trong repo này (môi trường không có Android SDK); có thể cần chỉnh nhẹ khi build lần đầu.
+- Android Auto có thể chặn hoặc đổi hành vi Surface sau các bản cập nhật.
+- Giải mã YouTube bằng NewPipeExtractor vi phạm điều khoản YouTube; chỉ dùng cá nhân và tự chịu trách nhiệm.
+- Cần tôn trọng bản quyền các kênh TV bạn dùng.
