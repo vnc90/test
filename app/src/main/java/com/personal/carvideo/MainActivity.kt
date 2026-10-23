@@ -2,6 +2,7 @@ package com.personal.carvideo
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.SurfaceView
 import android.widget.*
 import kotlin.concurrent.thread
 import okhttp3.OkHttpClient
@@ -13,7 +14,7 @@ class MainActivity : Activity() {
         // Danh sách IPTV Việt Nam do cộng đồng iptv-org duy trì (stream công khai, có thể hỏng/đổi bất kỳ lúc nào).
         const val DEFAULT_M3U = "https://iptv-org.github.io/iptv/countries/vn.m3u"
         // Video YouTube mặc định (sửa tuỳ ý).
-        const val DEFAULT_YT = "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+        const val DEFAULT_YT = "https://www.youtube.com/watch?v=CL13X-8o4h0"
     }
 
     private val http = OkHttpClient()

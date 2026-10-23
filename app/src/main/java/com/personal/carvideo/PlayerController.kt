@@ -2,6 +2,7 @@ package com.personal.carvideo
 
 import android.content.Context
 import android.view.Surface
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -25,6 +26,7 @@ object PlayerController {
 
     private fun ensure(context: Context): ExoPlayer =
         player ?: ExoPlayer.Builder(context.applicationContext).build().also { p ->
+            p.setWakeMode(C.WAKE_MODE_NETWORK) // keep playing with the phone screen off
             p.setVideoSurface(surface)
             p.addListener(object : Player.Listener {
                 override fun onIsPlayingChanged(isPlaying: Boolean) = notifyChanged()

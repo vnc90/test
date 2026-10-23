@@ -21,7 +21,7 @@ Chỉ dùng cá nhân, không phát hành lên Play Store. App không giới h�
 
 ## Nguồn mặc định
 - TV: `https://iptv-org.github.io/iptv/countries/vn.m3u` (iptv-org, cộng đồng duy trì; kênh có thể hỏng bất kỳ lúc nào, chưa kiểm tra được từ môi trường dev).
-- YouTube: `https://www.youtube.com/watch?v=jfKfPfyJRdk` (sửa tuỳ ý trong app; giá trị được nhớ lại).
+- YouTube: `https://www.youtube.com/watch?v=CL13X-8o4h0` (sửa tuỳ ý trong app; giá trị được nhớ lại).
 
 ## Lưu ý
 - Chưa được build/test trong repo này (môi trường không có Android SDK); có thể cần chỉnh nhẹ khi build lần đầu.
