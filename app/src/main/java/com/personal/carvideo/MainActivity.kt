@@ -32,6 +32,7 @@ class MainActivity : Activity() {
             setText(prefs.getString("yt", DEFAULT_YT))
         }
         val ytBtn = Button(this).apply { text = "Phát link này (ExoPlayer)" }
+        val loginBtn = Button(this).apply { text = "Đăng nhập YouTube (Premium để tắt quảng cáo)" }
         val ytCarBtn = Button(this).apply { text = "Mở giao diện YouTube trên xe" }
         val m3u = EditText(this).apply {
             hint = "URL danh sách M3U (IPTV)"
@@ -58,7 +59,7 @@ class MainActivity : Activity() {
         setContentView(LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(32, 48, 32, 32)
-            listOf(brand, preview, ytCarBtn, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
+            listOf(brand, preview, loginBtn, ytCarBtn, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
         })
 
         ytBtn.setOnClickListener {
@@ -67,6 +68,7 @@ class MainActivity : Activity() {
                 PlayerController.setChannels(this, listOf(it))
             }
         }
+        loginBtn.setOnClickListener { startActivity(android.content.Intent(this, LoginActivity::class.java)) }
         ytCarBtn.setOnClickListener {
             val link = yt.text.toString().trim()
             val url = runCatching { YouTubeResolver.normalize(link).replace("://www.", "://m.") }.getOrNull()

@@ -12,6 +12,7 @@ import android.view.Display
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -64,6 +65,8 @@ class WebSurface(private val context: Context) {
         /** Virtual display density: higher than the car's so the mobile site gets a phone-like layout. */
         const val DPI = 240
         const val HOME = CarState.YOUTUBE_HOME
+        const val USER_AGENT = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) " +
+            "Chrome/126.0.0.0 Mobile Safari/537.36"
     }
 }
 
@@ -83,9 +86,8 @@ private class WebPresentation(outer: Context, display: Display) : Presentation(o
             settings.domStorageEnabled = true
             settings.mediaPlaybackRequiresUserGesture = false
             settings.cacheMode = WebSettings.LOAD_DEFAULT
-            settings.userAgentString =
-                "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) " +
-                    "Chrome/126.0.0.0 Mobile Safari/537.36"
+            settings.userAgentString = WebSurface.USER_AGENT
+            CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView, url: String?) { CarState.lastUrl = url }
             }
