@@ -37,6 +37,11 @@ object PlayerController {
         player?.setVideoSurface(s)
     }
 
+    /** Release [s] only if it is still the active surface (phone preview vs. car screen). */
+    fun clearSurface(s: Surface) {
+        if (surface === s) setSurface(null)
+    }
+
     fun setChannels(context: Context, list: List<Channel>, start: Int = 0) {
         channels = list
         select(context, start)

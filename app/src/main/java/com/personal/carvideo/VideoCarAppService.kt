@@ -35,7 +35,7 @@ class VideoScreen(carContext: CarContext) : Screen(carContext) {
 
     private val surfaceCallback = object : SurfaceCallback {
         override fun onSurfaceAvailable(c: SurfaceContainer) = PlayerController.setSurface(c.surface)
-        override fun onSurfaceDestroyed(c: SurfaceContainer) = PlayerController.setSurface(null)
+        override fun onSurfaceDestroyed(c: SurfaceContainer) { c.surface?.let(PlayerController::clearSurface) }
     }
 
     init {

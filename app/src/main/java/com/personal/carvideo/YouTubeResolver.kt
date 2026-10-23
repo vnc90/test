@@ -30,9 +30,20 @@ object YouTubeResolver {
     }
 
     /** Blocking; call off the main thread. */
-    fun resolve(watchUrl: String): Channel {
+    private val idRegex = Regex("""(?:[?&]v=|youtu\.be/|shorts/|live/|embed/)([\w-]{11})""")
+
+    /** Accepts watch?v=, youtu.be/, shorts/, live/, embed/ links, or a bare 11-char video id. */
+    fun normalize(input: String): String {
+        val text = input.trim()
+        val id = idRegex.find(text)?.groupValues?.get(1)
+            ?: text.takeIf { Regex("[\\w-]{11}").matches(it) }
+            ?: error("Link không có video. Hãy dán link dạng youtube.com/watch?v=... hoặc youtu.be/...")
+        return "https://www.youtube.com/watch?v=$id"
+    }
+
+    fun resolve(input: String): Channel {
         if (!ready) { NewPipe.init(Dl); ready = true }
-        val info = StreamInfo.getInfo(watchUrl)
+        val info = StreamInfo.getInfo(normalize(input))
         val url = info.hlsUrl.takeIf { it.isNotEmpty() }                       // live streams
             ?: info.videoStreams.filter { !it.isVideoOnly }                    // muxed video+audio
                 .filter { it.height <= 720 }.maxByOrNull { it.height }?.content

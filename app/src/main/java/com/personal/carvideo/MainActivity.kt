@@ -35,7 +35,15 @@ class MainActivity : Activity() {
         }
         m3uField = m3u
         val m3uBtn = Button(this).apply { text = "Tải danh sách TV" }
-        list = ListView(this)
+        list = ListView(this).apply { layoutParams = LinearLayout.LayoutParams(-1, 0, 1f) }
+        val preview = SurfaceView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(-1, 0, 1f)
+            holder.addCallback(object : android.view.SurfaceHolder.Callback {
+                override fun surfaceCreated(h: android.view.SurfaceHolder) = PlayerController.setSurface(h.surface)
+                override fun surfaceChanged(h: android.view.SurfaceHolder, f: Int, w: Int, ht: Int) {}
+                override fun surfaceDestroyed(h: android.view.SurfaceHolder) = PlayerController.clearSurface(h.surface)
+            })
+        }
         val brand = TextView(this).apply {
             text = "${getString(R.string.app_name)}\n${getString(R.string.brand_author)} - ${getString(R.string.brand_community)}"
             textSize = 16f
@@ -46,7 +54,7 @@ class MainActivity : Activity() {
         setContentView(LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(32, 48, 32, 32)
-            listOf(brand, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
+            listOf(brand, preview, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
         })
 
         ytBtn.setOnClickListener {
