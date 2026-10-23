@@ -36,11 +36,17 @@ class MainActivity : Activity() {
         m3uField = m3u
         val m3uBtn = Button(this).apply { text = "Tải danh sách TV" }
         list = ListView(this)
+        val brand = TextView(this).apply {
+            text = "${getString(R.string.app_name)}\n${getString(R.string.brand_author)} - ${getString(R.string.brand_community)}"
+            textSize = 16f
+            setTextColor(0xFFB71C1C.toInt())
+            setPadding(0, 0, 0, 24)
+        }
 
         setContentView(LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(32, 48, 32, 32)
-            listOf(yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
+            listOf(brand, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
         })
 
         ytBtn.setOnClickListener {

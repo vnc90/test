@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Car Video</string>
+    <string name="app_name">J7 Việt Nam</string>
+    <string name="brand_author">Vũ Ngọc Chưởng</string>
+    <string name="brand_community">Cộng Đồng Người Dùng J7 Việt Nam</string>
 </resources>

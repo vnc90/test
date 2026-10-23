@@ -1,4 +1,6 @@
-# Car Video (cá nhân)
+# J7 Việt Nam - Car Video (cá nhân)
+
+Vũ Ngọc Chưởng - Cộng Đồng Người Dùng J7 Việt Nam
 
 App Android phát **YouTube** và **TV (IPTV/M3U/HLS)** lên màn hình xe qua Android Auto.
 Chỉ dùng cá nhân, không phát hành lên Play Store. App không giới hạn lúc phát; xem video khi lái xe nguy hiểm và có thể vi phạm luật.
@@ -9,6 +11,7 @@ Chỉ dùng cá nhân, không phát hành lên Play Store. App không giới h�
 - Trên điện thoại: dán link YouTube (giải mã bằng NewPipeExtractor) hoặc URL danh sách M3U rồi chọn kênh.
 
 ## Cài đặt
+0. Không cần Android Studio: vào tab **Actions** của repo, mở lần chạy "Build APK" mới nhất và tải artifact `j7-viet-nam-debug-apk` về điện thoại để cài.
 1. Mở thư mục này bằng Android Studio, để nó sync Gradle (tự tạo wrapper), rồi Run để cài lên điện thoại.
 2. Trên điện thoại: Cài đặt > Android Auto > bấm nhiều lần vào "Phiên bản" để bật **Developer settings**,
    rồi bật **Unknown sources**.
