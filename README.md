@@ -5,6 +5,11 @@ Vũ Ngọc Chưởng - Cộng Đồng Người Dùng J7 Việt Nam
 App Android phát **YouTube** và **TV (IPTV/M3U/HLS)** lên màn hình xe qua Android Auto.
 Chỉ dùng cá nhân, không phát hành lên Play Store. App không giới hạn lúc phát; xem video khi lái xe nguy hiểm và có thể vi phạm luật.
 
+## Giao diện trên xe
+- Mặc định màn hình xe hiện **giao diện YouTube thật** (m.youtube.com): chạm để chọn video/đề xuất, vuốt để cuộn.
+- Thanh nút: 🏠 trang chủ, ⬅ quay lại, 🎤 tìm bằng giọng nói (tiếng Việt, dùng micro điện thoại, cần cấp quyền micro), ⏯ phát/dừng.
+- Chọn kênh TV trên điện thoại thì xe chuyển sang chế độ TV (⏮ ⏯ ⏭ và nút YouTube để quay lại).
+
 ## Cách hoạt động
 - Khai báo là app *navigation* của Car App Library để Android Auto cấp một `Surface` toàn màn hình.
 - ExoPlayer (Media3) vẽ video lên Surface đó; điều khiển ⏮ ⏯ ⏭ nằm ở action strip.

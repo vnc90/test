@@ -1,6 +1,8 @@
 package com.personal.carvideo
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.SurfaceView
 import android.widget.*
@@ -29,7 +31,8 @@ class MainActivity : Activity() {
             hint = "Link YouTube (watch?v=...)"
             setText(prefs.getString("yt", DEFAULT_YT))
         }
-        val ytBtn = Button(this).apply { text = "Phát YouTube" }
+        val ytBtn = Button(this).apply { text = "Phát link này (ExoPlayer)" }
+        val ytCarBtn = Button(this).apply { text = "Mở giao diện YouTube trên xe" }
         val m3u = EditText(this).apply {
             hint = "URL danh sách M3U (IPTV)"
             setText(prefs.getString("m3u", DEFAULT_M3U))
@@ -55,7 +58,7 @@ class MainActivity : Activity() {
         setContentView(LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(32, 48, 32, 32)
-            listOf(brand, preview, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
+            listOf(brand, preview, ytCarBtn, yt, ytBtn, m3u, m3uBtn, list).forEach { addView(it) }
         })
 
         ytBtn.setOnClickListener {
@@ -64,7 +67,16 @@ class MainActivity : Activity() {
                 PlayerController.setChannels(this, listOf(it))
             }
         }
+        ytCarBtn.setOnClickListener {
+            val link = yt.text.toString().trim()
+            val url = runCatching { YouTubeResolver.normalize(link).replace("://www.", "://m.") }.getOrNull()
+            CarState.openYouTube(url)
+            toast("Đã mở YouTube trên màn hình xe")
+        }
         m3uBtn.setOnClickListener { loadM3u() }
+        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 1) // tìm kiếm bằng giọng nói
+        }
         loadM3u() // tự tải danh sách TV khi mở app
     }
 

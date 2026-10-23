@@ -51,6 +51,7 @@ object PlayerController {
 
     fun select(context: Context, i: Int) {
         if (channels.isEmpty()) return
+        CarState.setMode(CarState.Mode.TV)
         index = ((i % channels.size) + channels.size) % channels.size
         ensure(context).apply {
             setMediaItem(MediaItem.fromUri(channels[index].url))
@@ -62,6 +63,10 @@ object PlayerController {
 
     fun next(context: Context) = select(context, index + 1)
     fun previous(context: Context) = select(context, index - 1)
+
+    fun pause() {
+        player?.pause()
+    }
 
     fun togglePlay() {
         player?.let { it.playWhenReady = !it.playWhenReady }
