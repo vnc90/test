@@ -1,7 +1,7 @@
 # Car Video (cá nhân)
 
 App Android phát **YouTube** và **TV (IPTV/M3U/HLS)** lên màn hình xe qua Android Auto.
-Chỉ dùng cá nhân, không phát hành lên Play Store. **Chỉ xem khi xe đã đỗ.**
+Chỉ dùng cá nhân, không phát hành lên Play Store. App không giới hạn lúc phát; xem video khi lái xe nguy hiểm và có thể vi phạm luật.
 
 ## Cách hoạt động
 - Khai báo là app *navigation* của Car App Library để Android Auto cấp một `Surface` toàn màn hình.
@@ -14,7 +14,11 @@ Chỉ dùng cá nhân, không phát hành lên Play Store. **Chỉ xem khi xe đ
    rồi bật **Unknown sources**.
 3. Kết nối xe, mở app "Car Video" trong danh sách ứng dụng của Android Auto.
    (Có thể cần bật "Application mode: Developer" nếu app không hiện.)
-4. Mở app trên điện thoại, chọn nguồn phát.
+4. Mở app trên điện thoại: link YouTube và danh sách TV Việt Nam đã điền sẵn, app tự tải danh sách kênh; chọn kênh để phát.
+
+## Nguồn mặc định
+- TV: `https://iptv-org.github.io/iptv/countries/vn.m3u` (iptv-org, cộng đồng duy trì; kênh có thể hỏng bất kỳ lúc nào, chưa kiểm tra được từ môi trường dev).
+- YouTube: `https://www.youtube.com/watch?v=jfKfPfyJRdk` (sửa tuỳ ý trong app; giá trị được nhớ lại).
 
 ## Lưu ý
 - Chưa được build/test trong repo này (môi trường không có Android SDK); có thể cần chỉnh nhẹ khi build lần đầu.

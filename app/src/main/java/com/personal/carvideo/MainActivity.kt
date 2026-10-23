@@ -9,19 +9,31 @@ import okhttp3.Request
 
 /** Phone-side UI: pick a YouTube link or an M3U (IPTV) playlist; the car screen plays it. */
 class MainActivity : Activity() {
+    companion object {
+        // Danh sách IPTV Việt Nam do cộng đồng iptv-org duy trì (stream công khai, có thể hỏng/đổi bất kỳ lúc nào).
+        const val DEFAULT_M3U = "https://iptv-org.github.io/iptv/countries/vn.m3u"
+        // Video YouTube mặc định (sửa tuỳ ý).
+        const val DEFAULT_YT = "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+    }
+
     private val http = OkHttpClient()
     private lateinit var list: ListView
+    private lateinit var m3uField: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = getSharedPreferences("p", MODE_PRIVATE)
 
-        val yt = EditText(this).apply { hint = "Link YouTube (watch?v=...)" }
+        val yt = EditText(this).apply {
+            hint = "Link YouTube (watch?v=...)"
+            setText(prefs.getString("yt", DEFAULT_YT))
+        }
         val ytBtn = Button(this).apply { text = "Phát YouTube" }
         val m3u = EditText(this).apply {
             hint = "URL danh sách M3U (IPTV)"
-            setText(prefs.getString("m3u", ""))
+            setText(prefs.getString("m3u", DEFAULT_M3U))
         }
+        m3uField = m3u
         val m3uBtn = Button(this).apply { text = "Tải danh sách TV" }
         list = ListView(this)
 
@@ -32,12 +44,19 @@ class MainActivity : Activity() {
         })
 
         ytBtn.setOnClickListener {
+            prefs.edit().putString("yt", yt.text.toString().trim()).apply()
             io({ YouTubeResolver.resolve(yt.text.toString().trim()) }) {
                 PlayerController.setChannels(this, listOf(it))
             }
         }
-        m3uBtn.setOnClickListener {
-            val url = m3u.text.toString().trim()
+        m3uBtn.setOnClickListener { loadM3u() }
+        loadM3u() // tự tải danh sách TV khi mở app
+    }
+
+    private fun loadM3u() {
+        val prefs = getSharedPreferences("p", MODE_PRIVATE)
+        run {
+            val url = m3uField.text.toString().trim()
             prefs.edit().putString("m3u", url).apply()
             io({
                 http.newCall(Request.Builder().url(url).build()).execute().use { it.body!!.string() }
